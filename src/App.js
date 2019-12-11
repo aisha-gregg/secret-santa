@@ -4,16 +4,8 @@ import "./App.css";
 function App() {
   const [name, setName] = useState("");
   const [nameList, setNameList] = useState([]);
-  const nameNodes = [];
-  let isDisabled = false;
-
-  for (let i = 0; i < nameList.length; i++) {
-    nameNodes.push(<li>{nameList[i]}</li>);
-  }
-
-  if (name === "") {
-    isDisabled = true;
-  }
+  const isDisabled = !name.length;
+  const nodeNames = nameList.map(name => <li>{name}</li>);
 
   return (
     <div>
@@ -34,8 +26,7 @@ function App() {
         >
           Enter
         </button>
-
-        <ul>{nameNodes}</ul>
+        <ul>{nodeNames}</ul>
       </div>
     </div>
   );
