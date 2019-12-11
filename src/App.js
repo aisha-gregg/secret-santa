@@ -1,24 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [name, setName] = useState("");
+  const [nameList, setNameList] = useState([]);
+  const nameNodes = [];
+  let isDisabled = false;
+
+  for (let i = 0; i < nameList.length; i++) {
+    nameNodes.push(<li>{nameList[i]}</li>);
+  }
+
+  if (name === "") {
+    isDisabled = true;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <h1>Welcome to the secret santa App</h1>
+      <div>
+        <input
+          onInput={event => setName(event.target.value)}
+          type="text"
+          value={name}
+          placeholder="Name"
+        ></input>
+        <button
+          disabled={isDisabled}
+          onClick={() => {
+            setNameList([...nameList, name]);
+            setName("");
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          Enter
+        </button>
+
+        <ul>{nameNodes}</ul>
+      </div>
     </div>
   );
 }
