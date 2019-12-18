@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import "./App.css";
 import styles from "./App.module.css";
+import { AssignmentService } from "./AssignmentService";
 
 function App() {
+  const randomProvider = {
+    provide() {
+      return Math.random();
+    }
+  };
+  const assignmentService = new AssignmentService(randomProvider);
   const [name, setName] = useState("");
   const [nameList, setNameList] = useState([]);
   const [isShuffled, setIsShuffled] = useState(false);
@@ -28,7 +35,7 @@ function App() {
             }}
             key={isShown}
           >
-            Show
+            {isShown[index] ? "Hide" : "Show"}
           </button>
         </>
       )}
