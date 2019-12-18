@@ -1,19 +1,37 @@
 import React, { useState } from "react";
 import "./App.css";
-
 import styles from "./App.module.css";
 
 function App() {
   const [name, setName] = useState("");
   const [nameList, setNameList] = useState([]);
   const [isShuffled, setIsShuffled] = useState(false);
+  const [isShown, setIsShown] = useState([]);
 
   const isDisabled = !name.length;
 
-  const nodeNames = nameList.map(name => (
-    <li key={name}>
+  const nodeNames = nameList.map((name, index) => (
+    <li key={index}>
       {name}
-      {isShuffled && <input readOnly={true} type="password" value={name} />}
+      {isShuffled && (
+        <>
+          <input
+            readOnly={true}
+            type={isShown[index] ? "text" : "password"}
+            value={name}
+          />
+          <button
+            onClick={() => {
+              const isShownCopy = [...isShown];
+              isShownCopy[index] = !isShownCopy[index];
+              setIsShown(isShownCopy);
+            }}
+            key={isShown}
+          >
+            Show
+          </button>
+        </>
+      )}
     </li>
   ));
 
