@@ -1,10 +1,30 @@
 .wrapper {
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+}
+.header {
+  background-color: rgb(236, 83, 116);
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+}
+.inputs {
+  background-color: rgb(44, 248, 146);
+  align-content: center;
 }
 
 .column2 {
-  flex-direction: row;
+  display: flex;
 }
 
 .column1 {
-  flex-direction: row;
+  flex-direction: center;
+}
+
+.list {
+  font-family: fantasy;
+  float: left;
 }

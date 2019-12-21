@@ -9,6 +9,7 @@ function App() {
       return Math.random();
     }
   };
+
   const assignmentService = new AssignmentService(randomProvider);
   const [name, setName] = useState("");
   const [nameList, setNameList] = useState([]);
@@ -16,16 +17,31 @@ function App() {
   const [isShown, setIsShown] = useState([]);
 
   const isDisabled = !name.length;
+  var randomIndex;
+  var currentIndex;
+  var actualValue;
+  var nodeNames = nameList;
 
-  const nodeNames = nameList.map((name, index) => (
-    <li key={index}>
-      {name}
+  function assignSecretSantas(nodeNames) {
+    while (nodeNames.length !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      actualValue = nodeNames[currentIndex];
+      nodeNames[currentIndex] = nodeNames[randomIndex];
+      nodeNames[randomIndex] = actualValue;
+    }
+  }
+
+  nodeNames = nameList.map((name, index) => (
+    <li className={styles.list} key={index}>
+      {name + " "}
       {isShuffled && (
         <>
           <input
+            className={styles.inputs}
             readOnly={true}
             type={isShown[index] ? "text" : "password"}
-            value={name}
+            value={nodeNames}
           />
           <button
             onClick={() => {
@@ -44,9 +60,11 @@ function App() {
 
   return (
     <div>
-      <h1>Welcome to the secret santa App</h1>
-      <div>
+      <h1 className={styles.header}>Welcome to the secret santa App</h1>
+
+      <div className={styles.wrapper}>
         <input
+          className={styles.inputs}
           onChange={event => setName(event.target.value)}
           type="text"
           value={name}
@@ -63,15 +81,15 @@ function App() {
         </button>
 
         <button
-          disabled={nodeNames.length < 3}
+          hidden={nodeNames.length >= 3 ? !isShown : isShown}
           onClick={() => {
             setIsShuffled(true);
           }}
         >
-          Shuffle
+          Assign Secret Santas!
         </button>
 
-        <ul className={styles.wrapper}>{nodeNames}</ul>
+        <ul className={styles.list}>{nodeNames}</ul>
       </div>
     </div>
   );
