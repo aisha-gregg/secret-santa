@@ -13,8 +13,14 @@ export class AssignmentService {
     const assignments = {};
 
     for (let i = 0; i < values.length; i++) {
-      const element = values[i];
-      assignments[element] = newValues[i];
+      const value = values[i];
+      const newValue = newValues[i];
+
+      if (value === newValue) {
+        return this.assign(values);
+      }
+
+      assignments[value] = newValues[i];
     }
     return assignments;
   }

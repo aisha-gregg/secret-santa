@@ -6,7 +6,7 @@ import { AssignmentService } from "./AssignmentService";
 function App() {
   const randomProvider = {
     provide() {
-      return;
+      return Math.random();
     }
   };
 
