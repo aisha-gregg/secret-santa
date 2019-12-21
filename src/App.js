@@ -59,36 +59,37 @@ function App() {
   ));
 
   return (
-    <div>
+    <div className={styles.section}>
       <h1 className={styles.header}>Welcome to the secret santa App</h1>
 
       <div className={styles.wrapper}>
-        <input
-          className={styles.inputs}
-          onChange={event => setName(event.target.value)}
-          type="text"
-          value={name}
-          placeholder="Name"
-        ></input>
-        <button
-          disabled={isDisabled}
-          onClick={() => {
-            setNameList([...nameList, name]);
-            setName("");
-          }}
-        >
-          Enter
-        </button>
+        <div className={styles.form}>
+          <input
+            className={styles.inputs}
+            onChange={event => setName(event.target.value)}
+            type="text"
+            value={name}
+            placeholder="Name"
+          ></input>
+          <button
+            disabled={isDisabled}
+            onClick={() => {
+              setNameList([...nameList, name]);
+              setName("");
+            }}
+          >
+            Enter
+          </button>
 
-        <button
-          hidden={nodeNames.length >= 3 ? !isShown : isShown}
-          onClick={() => {
-            setIsShuffled(true);
-          }}
-        >
-          Assign Secret Santas!
-        </button>
-
+          <button
+            hidden={nodeNames.length >= 3 ? !isShown : isShown}
+            onClick={() => {
+              setIsShuffled(true);
+            }}
+          >
+            Assign Secret Santas!
+          </button>
+        </div>
         <ul className={styles.list}>{nodeNames}</ul>
       </div>
     </div>

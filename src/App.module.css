@@ -1,7 +1,8 @@
 .wrapper {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-
+  align-items: center;
   width: 100%;
   height: 100%;
 }
@@ -26,5 +27,12 @@
 
 .list {
   font-family: fantasy;
-  float: left;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+}
+
+.section {
+  margin: 0 auto;
+  max-width: 40rem;
 }
