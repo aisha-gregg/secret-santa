@@ -6,7 +6,7 @@ import { AssignmentService } from "./AssignmentService";
 function App() {
   const randomProvider = {
     provide() {
-      return Math.random();
+      return;
     }
   };
 
@@ -17,20 +17,6 @@ function App() {
   const [isShown, setIsShown] = useState([]);
 
   const isDisabled = !name.length;
-  var randomIndex;
-  var currentIndex;
-  var actualValue;
-  var nodeNames = nameList;
-
-  function assignSecretSantas(nodeNames) {
-    while (nodeNames.length !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      actualValue = nodeNames[currentIndex];
-      nodeNames[currentIndex] = nodeNames[randomIndex];
-      nodeNames[randomIndex] = actualValue;
-    }
-  }
 
   nodeNames = nameList.map((name, index) => (
     <li className={styles.list} key={index}>
