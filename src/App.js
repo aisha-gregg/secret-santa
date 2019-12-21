@@ -15,10 +15,11 @@ function App() {
   const [nameList, setNameList] = useState([]);
   const [isShuffled, setIsShuffled] = useState(false);
   const [isShown, setIsShown] = useState([]);
+  const [assignedNames, setAssignedNames] = useState([]);
 
   const isDisabled = !name.length;
 
-  nodeNames = nameList.map((name, index) => (
+  const nodeNames = nameList.map((name, index) => (
     <li className={styles.list} key={index}>
       {name + " "}
       {isShuffled && (
@@ -27,7 +28,7 @@ function App() {
             className={styles.inputs}
             readOnly={true}
             type={isShown[index] ? "text" : "password"}
-            value={nodeNames}
+            value={assignedNames[index]}
           />
           <button
             onClick={() => {
@@ -71,6 +72,8 @@ function App() {
             hidden={nodeNames.length >= 3 ? !isShown : isShown}
             onClick={() => {
               setIsShuffled(true);
+              const assignedNames = assignmentService.assign(nameList);
+              setAssignedNames(Object.values(assignedNames));
             }}
           >
             Assign Secret Santas!
